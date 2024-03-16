@@ -7,9 +7,12 @@ export default function App() {
 
   function handleSubmit(e){
     e.preventDefault()
+
     setTodos((currentTodos) => {
-      return
-    }[...todos, {id: crypto.randomUUID() title:}])
+      return [
+        ...currentTodos, {id: crypto.randomUUID(), title:newItem, completed: false},
+      ]
+    })
   }
   return(
     <> {/*These are used to write more than one element inside a return*/}
@@ -21,14 +24,16 @@ export default function App() {
         <button className='button'>Add</button>
     </form>
     <h1 className='header'>Todo List</h1>
-    <ul className="list">
-      <li>
+    <ul className="list"> 
+      {todos.map(todo => {
+        <li>
         <label>
-          <input type="checkbox"/>
-          Item 1
+          <input type="checkbox" checked={todo.completed}/>
+            {todo.title}
         </label>
         <button className='btn btn-dangers'>Delete</button>
       </li>
+      })}
     </ul>
   </>)
 }
